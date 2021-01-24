@@ -4,12 +4,12 @@ node {
     }
 
     stage('Example') {
-        echo "Current build number: ${currentBuild.number}"
-        writeFile file: 'index.html', text: "Hello visitor!: ${currentBuild.number}"        
+        echo "Current build number: ${BUILD_NUMBER}"
+        writeFile file: 'index.html', text: "Hello visitor!: ${BUILD_NUMBER}"        
         docker.withRegistry('', 'dockerCreds') {
-            def myImage = docker.build("liransehayk/nginx-exam:${currentBuild.number}")
+            def myImage = docker.build("liransehayk/nginx-exam:${BUILD_NUMBER}")
             
-            myImage.push('latest')
+            myImage.push(${BUILD_NUMBER})
         }
     }
 

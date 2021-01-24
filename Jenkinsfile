@@ -9,7 +9,7 @@ node {
         docker.withRegistry('', 'dockerCreds') {
             def myImage = docker.build("liransehayk/nginx-exam:${BUILD_NUMBER}")
             
-            myImage.push(${BUILD_NUMBER})
+            myImage.push("${BUILD_NUMBER}")
         }
     }
 

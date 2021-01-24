@@ -1,4 +1,7 @@
 node {
+    stage('checkout') {
+        scm_checkout()
+    }
     stage('Example') {
         echo "Current build number: ${currentBuild.number}"
         writeFile file: 'index.html', text: "Current build number: ${currentBuild.number}"

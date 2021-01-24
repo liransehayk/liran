@@ -2,6 +2,7 @@ node {
     stage('checkout') {
         checkout scm
     }
+
     stage('Example') {
         echo "Current build number: ${currentBuild.number}"
         writeFile file: 'index.html', text: "Current build number: ${currentBuild.number}"
@@ -11,5 +12,11 @@ node {
             
             myImage.push('latest')
         }
+    }
+
+    stage('kubernetes') {
+        withKubeConfig([credentialsId: 'liran-cluster']) {  
+            sh 'kubectl apply -f deployment.yaml'  
+     }  
     }
 }

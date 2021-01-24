@@ -3,17 +3,16 @@ node {
         checkout scm
     }
 
-    stage('Example') {
-        echo "Current build number: ${BUILD_NUMBER}"
+    stage('Build') {
         writeFile file: 'index.html', text: "Hello visitor!: ${BUILD_NUMBER}"        
         docker.withRegistry('', 'dockerCreds') {
-            def myImage = docker.build("liransehayk/nginx-exam:${BUILD_NUMBER}")
+            def myImage = docker.build("nginx-exam:${BUILD_NUMBER}")
             
             myImage.push("${BUILD_NUMBER}")
         }
     }
 
-    stage('kubernetes') {
+    stage('Deploy') {
         sh 'sed s/tag/${BUILD_NUMBER}/ deployment.yaml.template > deployment.yaml'
         withKubeConfig([credentialsId: 'kubeconfig']) {  
             sh 'kubectl apply -f deployment.yaml'  

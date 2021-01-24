@@ -17,5 +17,6 @@ spec:
       containers:
       - name: nginx
         image: liransehayk/nginx-exam:latest
+        imagePullPolicy: "Always"
         ports:
         - containerPort: 80

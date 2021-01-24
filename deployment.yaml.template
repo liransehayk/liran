@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: liransehayk/nginx-exam:${currentBuild.number}
+        image: liransehayk/nginx-exam:<tag>
         imagePullPolicy: "Always"
         ports:
         - containerPort: 80

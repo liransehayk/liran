@@ -6,7 +6,7 @@ node {
     stage('Build') {
         writeFile file: 'index.html', text: "Hello visitor!: ${BUILD_NUMBER}"        
         docker.withRegistry('', 'dockerCreds') {
-            def myImage = docker.build("nginx-exam:${BUILD_NUMBER}")
+            def myImage = docker.build("liransehayk/nginx-exam:${BUILD_NUMBER}")
             
             myImage.push("${BUILD_NUMBER}")
         }

@@ -14,7 +14,7 @@ node {
     }
 
     stage('kubernetes') {
-        sh 'sed s/tag/${currentBuild.number}/ deployment.yaml.template > deployment.yaml'
+        sh 'sed s/tag/${BUILD_NUMBER}/ deployment.yaml.template > deployment.yaml'
         withKubeConfig([credentialsId: 'kubeconfig']) {  
             sh 'kubectl apply -f deployment.yaml'  
      }  

@@ -15,7 +15,7 @@ node {
     }
 
     stage('kubernetes') {
-        withKubeConfig([credentialsId: 'liran-cluster']) {  
+        withKubeConfig([credentialsId: 'kubeconfig']) {  
             sh 'kubectl apply -f deployment.yaml'  
      }  
     }

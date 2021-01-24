@@ -1,6 +1,6 @@
 node {
     stage('checkout') {
-        scm_checkout()
+        checkout scm
     }
     stage('Example') {
         echo "Current build number: ${currentBuild.number}"
